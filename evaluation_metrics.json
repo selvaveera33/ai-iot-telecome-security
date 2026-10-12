@@ -1,0 +1,76 @@
+{
+  "random_forest": {
+    "accuracy": 0.9573333333333334,
+    "precision": 0.9431524547803618,
+    "recall": 0.9733333333333334,
+    "f1_score": 0.958005249343832,
+    "confusion_matrix": [
+      [
+        353,
+        22
+      ],
+      [
+        10,
+        365
+      ]
+    ],
+    "classification_report": {
+      "NORMAL": {
+        "precision": 0.9724517906336089,
+        "recall": 0.9413333333333334,
+        "f1-score": 0.9566395663956639,
+        "support": 375.0
+      },
+      "SUSPICIOUS": {
+        "precision": 0.9431524547803618,
+        "recall": 0.9733333333333334,
+        "f1-score": 0.958005249343832,
+        "support": 375.0
+      },
+      "accuracy": 0.9573333333333334,
+      "macro avg": {
+        "precision": 0.9578021227069853,
+        "recall": 0.9573333333333334,
+        "f1-score": 0.957322407869748,
+        "support": 750.0
+      },
+      "weighted avg": {
+        "precision": 0.9578021227069853,
+        "recall": 0.9573333333333334,
+        "f1-score": 0.9573224078697479,
+        "support": 750.0
+      }
+    },
+    "feature_importance": {
+      "packets": 0.07055256237639015,
+      "bytes_transferred": 0.051880654049897,
+      "duration_sec": 0.04993278293503882,
+      "failed_auth_attempts": 0.23548169709454486,
+      "connections_per_min": 0.4276688273974744,
+      "traffic_rate": 0.1644834761466546
+    }
+  },
+  "isolation_forest": {
+    "precision": 0.8876712328767123,
+    "recall": 0.864,
+    "f1_score": 0.8756756756756757,
+    "confusion_matrix": [
+      [
+        334,
+        41
+      ],
+      [
+        51,
+        324
+      ]
+    ],
+    "contamination": 0.08,
+    "training_records_used": 1125
+  },
+  "dataset": {
+    "records": 3000,
+    "test_records": 750,
+    "random_state": 42,
+    "note": "Synthetic demonstration data; metrics do not represent real telecom performance."
+  }
+}
