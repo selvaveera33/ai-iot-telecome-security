@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI IoT Telecom Security</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b1220;
+    color:#e5edf8;
+}
+header{
+    background:#111c30;
+    padding:24px;
+    border-bottom:1px solid #263650;
+}
+header h1{margin:0;color:#5eead4}
+header p{color:#9aabc4}
+main{max-width:1100px;margin:25px auto;padding:0 18px}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+.card{
+    background:#142139;
+    border:1px solid #283b59;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+.metric{font-size:30px;font-weight:bold;color:#5eead4}
+label{display:block;margin-top:13px;color:#c7d5e8}
+input{
+    width:100%;padding:11px;margin-top:6px;
+    background:#0b1220;color:white;
+    border:1px solid #344966;border-radius:6px;
+}
+button{
+    margin-top:18px;padding:12px 18px;
+    background:#0d9488;color:white;
+    border:0;border-radius:7px;cursor:pointer;
+    font-weight:bold;
+}
+button:hover{background:#0f766e}
+pre{
+    white-space:pre-wrap;overflow-wrap:anywhere;
+    background:#0b1220;padding:15px;border-radius:8px;
+}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px;text-align:left;border-bottom:1px solid #344966}
+.notice{color:#fbbf24}
+@media(max-width:600px){header{padding:16px}}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>🛡️ AI IoT Telecom Security</h1>
+    <p>5G Network Traffic Analysis & Threat Monitoring</p>
+</header>
+
+<main>
+    <div class="cards">
+        <div class="card">
+            <p>Total Analyses</p>
+            <div class="metric">{{ total }}</div>
+        </div>
+        <div class="card">
+            <p>Flagged Records</p>
+            <div class="metric">{{ alerts }}</div>
+        </div>
+        <div class="card">
+            <p>Detection Models</p>
+            <div class="metric">2</div>
+            <p>Random Forest + Isolation Forest</p>
+        </div>
+    </div>
+
+    <section class="card">
+        <h2>📡 Analyze Traffic</h2>
+        <p>Enter simulated or authorized traffic feature values.</p>
+
+        <form method="post">
+            {% for feature in features %}
+            <label>
+                {{ feature.replace('_',' ').title() }}
+                <input
+                    type="number"
+                    name="{{ feature }}"
+                    step="any"
+                    min="0"
+                    required
+                    value="{{ request.form.get(feature, '') }}"
+                >
+            </label>
+            {% endfor %}
+
+            <button type="submit">🔍 Analyze Traffic</button>
+        </form>
+
+        {% if error %}
+            <p style="color:#f87171">{{ error }}</p>
+        {% endif %}
+
+        {% if result %}
+            <h3>Analysis Result</h3>
+            <pre>{{ result | tojson(indent=2) }}</pre>
+        {% endif %}
+    </section>
+
+    <section class="card">
+        <h2>🚨 Recent Analysis History</h2>
+
+        {% if recent %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Time</th>
+                <th>Status</th>
+            </tr>
+            {% for row in recent %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No traffic analyses yet.</p>
+        {% endif %}
+    </section>
+
+    <p class="notice">
+        Educational prototype: alerts require human review.
+        Detection results are not proof of an attack.
+    </p>
+</main>
+</body>
+</html>
